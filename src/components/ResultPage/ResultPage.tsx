@@ -6,13 +6,7 @@ import {
 import { useNavigate } from 'react-router';
 import { AddHome } from '@mui/icons-material';
 import RepeatIcon from '@mui/icons-material/Repeat';
-// import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import './ResultPage.scss';
-// import { Box, Fab } from '@mui/material';
-// import AddIcon from '@mui/icons-material/Add';
-// import RepeatIcon from '@mui/icons-material/Repeat';
-// import { useNavigate } from 'react-router-dom';
-// import { useSelector } from 'react-redux';
 import { getAllAnswersSelector } from '../../store/selectors';
 import { HandlerResults } from './HendlerResults';
 import { Answer } from '../../react-app-env.d';
@@ -27,7 +21,6 @@ export const ResultPage = () => {
 
   return (
     <>
-      <h1>Результати</h1>
       <Box sx={{ '& > :not(style)': { m: 1 } }}>
         <Fab
           color="primary"
@@ -39,6 +32,8 @@ export const ResultPage = () => {
           <AddHome />
         </Fab>
       </Box>
+      <h1 className="title">Результати</h1>
+
       <HandlerResults
         lastAnswer={lastAnswer}
       />
@@ -65,22 +60,29 @@ export const ResultPage = () => {
           <RepeatIcon />
         </Fab>
       </Box>
-      <Stack spacing={2} direction="row" sx={{ m: 1 }}>
+      <Stack
+        spacing={2}
+        direction="row"
+        sx={{
+          margin: 1,
+          display: 'flex',
+          flexWrap: 'wrap',
+        }}
+      >
         {results.map((item, i) => (
 
           <Button
             variant="outlined"
             type="button"
             // eslint-disable-next-line react/no-array-index-key
-            key={i}
+            key={i} // з масивом нема ніяких маніпуляцій, тому індекси будуть унікальні
             onClick={() => {
               setIsShow(true);
               setShowThisSession(item);
             }}
           >
-            {`Повтторення ${i + 1}`}
+            {`Повторення ${i + 1}`}
           </Button>
-
         ))}
       </Stack>
       {isShow && <HandlerResults lastAnswer={showThisSession} />}

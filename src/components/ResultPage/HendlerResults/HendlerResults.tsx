@@ -1,12 +1,5 @@
 import * as React from 'react';
-// import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import './HendlerResults.scss';
-// import { Box, Fab } from '@mui/material';
-// import AddIcon from '@mui/icons-material/Add';
-// import RepeatIcon from '@mui/icons-material/Repeat';
-// import { useNavigate } from 'react-router-dom';
-// import { useSelector } from 'react-redux';
-
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import { Alert, Stack } from '@mui/material';
@@ -49,22 +42,22 @@ export const HandlerResults: React.FC<Props> = ({ lastAnswer }) => {
   return (
     <>
       <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 700 }} aria-label="customized table">
+        <Table sx={{ maxWidth: 700, margin: '0 auto' }} aria-label="customized table">
           <TableHead>
             <TableRow>
-              <StyledTableCell>Номер завдання</StyledTableCell>
-              <StyledTableCell align="right">Правильна відповідь чи хибна</StyledTableCell>
-              <StyledTableCell align="right">Слово для перекладу</StyledTableCell>
-              <StyledTableCell align="right">Твоя відповідь</StyledTableCell>
+              <StyledTableCell align="center">№</StyledTableCell>
+              <StyledTableCell align="center">Правильно/хибно</StyledTableCell>
+              <StyledTableCell align="center">Слово </StyledTableCell>
+              <StyledTableCell align="center">Твоя відповідь</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {lastAnswer.map((item) => (
               <StyledTableRow key={item.number}>
-                <StyledTableCell align="right">{item.number}</StyledTableCell>
-                <StyledTableCell align="right">{`${item.isRight}`}</StyledTableCell>
-                <StyledTableCell align="right">{item.taskWord}</StyledTableCell>
-                <StyledTableCell align="right">{item.yuorAnswer}</StyledTableCell>
+                <StyledTableCell align="center">{item.number}</StyledTableCell>
+                <StyledTableCell align="center">{`${item.isRight}`}</StyledTableCell>
+                <StyledTableCell align="center">{item.taskWord}</StyledTableCell>
+                <StyledTableCell align="center">{item.yuorAnswer}</StyledTableCell>
               </StyledTableRow>
             ))}
           </TableBody>

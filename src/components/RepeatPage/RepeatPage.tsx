@@ -1,7 +1,10 @@
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { AddHome } from '@mui/icons-material';
 import { useNavigate } from 'react-router';
-import { Button, Stack } from '@mui/material';
+import {
+  Button, Stack, Fab, Box,
+} from '@mui/material';
 import { getCurrentVocabularySelector } from '../../store/selectors';
 import './RepeatPage.scss';
 import { Word } from '../../react-app-env.d';
@@ -40,20 +43,26 @@ export const RepeatPage = () => {
 
   dispatch(setTenWords(prepareData()));
   const navigate = useNavigate();
-  // eslint-disable-next-line no-console
-  // console.log(pageId);
 
-  // const [translate, setTranslate] = React.useState('');
-  // const [errorMessage, setErrorMessage] = React.useState('');
-  // const [error, setError] = React.useState(false);
-  // const [isSuccess, setIsSuccess] = React.useState(false);
   return (
     <>
-      <h1>Повторити слова</h1>
+      <Box sx={{ '& > :not(style)': { m: 1 } }}>
+        <Fab
+          color="primary"
+          aria-label="add"
+          onClick={() => {
+            navigate('/');
+          }}
+        >
+          <AddHome />
+        </Fab>
+      </Box>
+      <h1 className="title">Повторити слова</h1>
       <h2>{}</h2>
 
       <Stack spacing={2} direction="row" sx={{ m: 1 }}>
         <Button
+          sx={{ m: '0 auto' }}
           variant="outlined"
           type="button"
           onClick={() => {

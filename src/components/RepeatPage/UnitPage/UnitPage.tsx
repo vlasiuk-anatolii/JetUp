@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useParams, useNavigate } from 'react-router';
-import { Button, Stack } from '@mui/material';
+import { Stack } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCurrentTenWordsSelector } from '../../../store/selectors';
 
@@ -23,8 +23,7 @@ export const UnitPage = () => {
   }
 
   getFour.sort((a, b) => a.translate.localeCompare(b.translate));
-  // eslint-disable-next-line no-console
-  // console.log(unitId);
+
   const answer: Answer = {
     number: 0,
     isRight: false,
@@ -34,28 +33,36 @@ export const UnitPage = () => {
 
   const [sessionAnswer, setSessionAnswer] = React.useState<Answer[]>([]);
 
-  // eslint-disable-next-line no-console
-  console.log(sessionAnswer.length);
-
-  if (sessionAnswer.length === 10) {
-    dispatch(setSessionAnswers(sessionAnswer));
-    navigate('/result');
-  }
-
-  // const [translate, setTranslate] = React.useState('');
-  // const [errorMessage, setErrorMessage] = React.useState('');
-  // const [error, setError] = React.useState(false);
-  // const [isSuccess, setIsSuccess] = React.useState(false);
-  // eslint-disable-next-line no-console
+  React.useEffect(() => {
+    if (sessionAnswer.length === 10) {
+      dispatch(setSessionAnswers(sessionAnswer));
+      navigate('/result');
+    }
+  }, [sessionAnswer]);
 
   return (
     <>
-      <h1>Повторення слів</h1>
-      <h2>{currentUnit ? currentUnit.word : ''}</h2>
-      <Stack spacing={2} direction="row" sx={{ m: 1 }}>
+      <h1 className="title">Повторення слів</h1>
+      <h3 className="what_todo">
+        Обери правильний переклад слова:
+        {' '}
+        <span className="word">
+          {' '}
+          {currentUnit ? currentUnit.word : ''}
+        </span>
+      </h3>
+      <Stack
+        spacing={2}
+        direction="row"
+        sx={{
+          m: 1,
+          display: 'flex',
+          justifyContent: 'center',
+        }}
+      >
         {currentUnit && getFour.map(item => (
-          <Button
-            variant="outlined"
+          <button
+            className="button"
             key={item.id}
             type="button"
             onClick={() => {
@@ -67,19 +74,16 @@ export const UnitPage = () => {
                 answer.number = +unitId;
               }
 
-              setSessionAnswer([...sessionAnswer, answer]);
               answer.taskWord = currentUnit.word;
               answer.yuorAnswer = item.translate;
+              setSessionAnswer([...sessionAnswer, answer]);
               if (unitId) {
-                // eslint-disable-next-line no-console
-                console.log('if', sessionAnswer.length);
                 navigate(`/repeat/${+unitId + 1}`);
               }
             }}
           >
             {item.translate}
-          </Button>
-
+          </button>
         ))}
       </Stack>
     </>

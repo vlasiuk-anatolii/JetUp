@@ -28,35 +28,48 @@ export const MainPage = () => {
 
   return (
     <>
-      <h1>Словник</h1>
-      <div style={{ height: 700, width: '100%' }}>
+      <h1 className="title">Словник</h1>
+      <div style={{
+        height: 700,
+        width: 700,
+        margin: '0 auto',
+      }}
+      >
         <DataGrid
           rows={rows}
           columns={columns}
           pageSize={10}
-          rowsPerPageOptions={[5]}
+          rowsPerPageOptions={[10]}
           checkboxSelection
         />
-        <Box sx={{ '& > :not(style)': { m: 1 } }}>
-          <Fab
-            color="primary"
-            aria-label="add"
-            onClick={() => {
-              navigate('/addword');
-            }}
-          >
-            <AddIcon />
-          </Fab>
-          <Fab
-            color="primary"
-            aria-label="repeat"
-            onClick={() => {
-              navigate('/repeat');
-            }}
-          >
-            <RepeatIcon />
-          </Fab>
-        </Box>
+        <div className="box_button">
+          <Box sx={{ display: 'flex' }}>
+            <h2 className="subtitle">Додати слово</h2>
+            <Fab
+              sx={{ m: '10px' }}
+              color="primary"
+              aria-label="add"
+              onClick={() => {
+                navigate('/addword');
+              }}
+            >
+              <AddIcon />
+            </Fab>
+          </Box>
+          <Box sx={{ display: 'flex' }}>
+            <h2 className="subtitle">Перевірити слова</h2>
+            <Fab
+              sx={{ m: '10px' }}
+              color="primary"
+              aria-label="repeat"
+              onClick={() => {
+                navigate('/repeat');
+              }}
+            >
+              <RepeatIcon />
+            </Fab>
+          </Box>
+        </div>
       </div>
     </>
   );
